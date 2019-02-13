@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
+import Sound from 'react-sound';
 
 class Artists extends Component {
   state = {
@@ -144,12 +145,17 @@ const SongsList = (props) => {
       <div>
         {props.songs.filter(song => song.split('/')[0] + '/' + song.split('/')[1] === props.selectedAlbum)
           .map(song => 
+          <div key={song}>
             <Button
               onClick={() => props.onClickSong(song)}
-              key={song}
             >
               {song.split('/')[2]}
             </Button>
+            <Sound
+              url={"https://s3.amazonaws.com/testy-tester-351541531532/" + song}
+              playStatus={props.selectedSong === song ? Sound.status.PLAYING : Sound.status.STOPPED}
+            />
+          </div>
           )
         }
       </div>
