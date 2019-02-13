@@ -10,7 +10,7 @@ class Landing extends Component {
       <div>
         Welcome to Spooterfy
         <Link
-            to={ROUTES.ARTISTS}
+            to={ROUTES.MUSIC}
         >
           <Button>
             Get Started
