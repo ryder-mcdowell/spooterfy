@@ -13,7 +13,7 @@ class Artists extends Component {
   };
 
   componentDidMount() {
-    fetch('http://ec2-3-82-153-6.compute-1.amazonaws.com:8081/songs')
+    fetch('http://ec2-3-95-218-160.compute-1.amazonaws.com:8081/music')
     .then(response => response.json())
     .then(responseJson => {
       let artists = [];
