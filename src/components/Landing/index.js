@@ -2,50 +2,19 @@ import React, { Component } from 'react';
 import './styles.css';
 import { withRouter } from 'react-router-dom';
 import firebase, { GoogleAuthProvider } from '../Firebase';
-import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import axios from 'axios';
 
 import * as ROUTES from '../../constants/routes';
 
 class Landing extends Component {
   state = {
-    email: '',
-    password: '',
     error: ''
   };
 
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-  }
-
-  onSignUpButton(event) {
-    const { email, password } = this.state;
-    event.preventDefault();
-
-    firebase
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then(user => {
-      this.props.history.push(ROUTES.GENRES);
-    })
-    .catch(error => {
-      this.setState({ error });
-    });
-  }
-
-  onSignInButton(event) {
-    const { email, password } = this.state;
-    event.preventDefault();
-
-    firebase
-    .auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(user => {
-      this.props.history.push(ROUTES.GENRES);
-    })
-    .catch(error => {
-      this.setState({ error });
-    });
   }
 
   onGoogleButton(event) {
@@ -54,7 +23,8 @@ class Landing extends Component {
     firebase
     .auth()
     .signInWithPopup(GoogleAuthProvider)
-    .then(user => {
+    .then(({ user }) => {
+      axios.post('http://ec2-54-89-244-138.compute-1.amazonaws.com:8081/save-user', { id: user.uid, name: user.displayName, email: user.email });
       this.props.history.push(ROUTES.GENRES);
     })
     .catch(error => {
@@ -64,34 +34,17 @@ class Landing extends Component {
 
   render() {
     const {
-      email,
-      password,
       error
     } = this.state;
 
     return (
       <div className="landingContainer">
         <div className ="authContainer">
-          <Input
-            name="email"
-            value={email}
-            onChange={this.onChange}
-            type="text"
-            placeholder="email"
-          />
-          <br />
-          <Input
-            name="password"
-            value={password}
-            onChange={this.onChange}
-            type="password"
-            placeholder="password"
-          />
-          <br />
-          <div className="buttonsContainer">
-            <Button onClick={this.onSignUpButton.bind(this)} variant="outlined">Sign Up</Button>
-            <Button onClick={this.onSignInButton.bind(this)} variant="outlined">Sign In</Button>
-          </div>
+
+          <Typography>
+            Welcome to Spooterfy
+          </Typography>
+          
           <Button onClick={this.onGoogleButton.bind(this)} variant="outlined">Sign In With Google</Button>
 
           {error && <p>{error.message}</p>}
