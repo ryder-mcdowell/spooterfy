@@ -1,2 +1,2 @@
 export const LANDING = '/';
-export const MUSIC = '/music';
+export const GENRES = '/genres';

@@ -4,7 +4,7 @@ import ProtectedRoute from '../ProtectedRoute';
 import firebase from '../Firebase';
 import Navigation from '../Navigation';
 import Landing from '../Landing';
-import Music from '../Music';
+import Genres from '../Genres';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -27,8 +27,8 @@ class App extends Component {
           <Navigation authenticated={authenticated} />
 
           <Switch>
-            <Route exact path={ROUTES.LANDING} render={() => authenticated ? <Redirect to={ROUTES.MUSIC} /> : <Landing />} />
-            <ProtectedRoute exact path={ROUTES.MUSIC} component={Music} authenticated={authenticated} />
+            <Route exact path={ROUTES.LANDING} render={() => authenticated ? <Redirect to={ROUTES.GENRES} /> : <Landing />} />
+            <ProtectedRoute exact path={ROUTES.GENRES} component={Genres} authenticated={authenticated} />
           </Switch>
         </div>
       </Router>

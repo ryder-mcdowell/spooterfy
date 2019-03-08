@@ -23,10 +23,10 @@ class Navigation extends Component {
           </Link>
           
           <Link
-            to={ROUTES.MUSIC}
+            to={ROUTES.GENRES}
           >
             <Typography variant="button">
-              Music
+              Genres
             </Typography>
           </Link>
         </MenuItem>

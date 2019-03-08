@@ -26,7 +26,7 @@ class Landing extends Component {
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(user => {
-      this.props.history.push(ROUTES.MUSIC);
+      this.props.history.push(ROUTES.GENRES);
     })
     .catch(error => {
       this.setState({ error });
@@ -41,7 +41,7 @@ class Landing extends Component {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(user => {
-      this.props.history.push(ROUTES.MUSIC);
+      this.props.history.push(ROUTES.GENRES);
     })
     .catch(error => {
       this.setState({ error });
@@ -55,7 +55,7 @@ class Landing extends Component {
     .auth()
     .signInWithPopup(GoogleAuthProvider)
     .then(user => {
-      this.props.history.push(ROUTES.MUSIC);
+      this.props.history.push(ROUTES.GENRES);
     })
     .catch(error => {
       this.setState({ error });
