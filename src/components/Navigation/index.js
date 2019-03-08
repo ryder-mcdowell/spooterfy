@@ -21,6 +21,7 @@ class Navigation extends Component {
               Landing
             </Typography>
           </Link>
+          
           <Link
             to={ROUTES.MUSIC}
           >
