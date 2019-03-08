@@ -12,7 +12,7 @@ class GenreArtists extends Component {
   componentDidMount() {
     const { match } = this.props;
 
-    fetch('http://ec2-3-94-103-70.compute-1.amazonaws.com:8081/artists/for/genre?genre=' + match.params.genre.replace(':', ''))
+    fetch('http://ec2-54-89-244-138.compute-1.amazonaws.com:8081/artists/for/genre?genre=' + match.params.genre.replace(':', ''))
       .then(response => response.json())
       .then(responseJson => {
         this.setState({ artists: responseJson.body.records });
@@ -37,7 +37,7 @@ const ArtistsList = ({ artists }) => {
   return (
     <div>
       {artists.map(artist => 
-        <Link to={ROUTES.GENRE_ARTISTS} key={artist}>
+        <Link to={'/artist/:' + artist} key={artist}>
           <Button>
             {artist}
           </Button>
