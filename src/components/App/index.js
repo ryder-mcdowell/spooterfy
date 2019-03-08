@@ -5,6 +5,7 @@ import firebase from '../Firebase';
 import Navigation from '../Navigation';
 import Landing from '../Landing';
 import Genres from '../Genres';
+import GenreArtists from '../GenreArtists';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -29,6 +30,7 @@ class App extends Component {
           <Switch>
             <Route exact path={ROUTES.LANDING} render={() => authenticated ? <Redirect to={ROUTES.GENRES} /> : <Landing />} />
             <ProtectedRoute exact path={ROUTES.GENRES} component={Genres} authenticated={authenticated} />
+            <ProtectedRoute exact path={ROUTES.GENRE_ARTISTS} component={GenreArtists} authenticated={authenticated} />
           </Switch>
         </div>
       </Router>

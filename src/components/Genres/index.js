@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter, Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
 class Genres extends Component {
@@ -14,20 +15,13 @@ class Genres extends Component {
       });
   }
 
-  onClickGenre() {
-    //navigate
-  }
-
   render() {
     const { genres } = this.state;
 
     return (
       <div>
         {genres
-          ? <GenresList
-              genres={genres}
-              onClickGenre={this.onClickGenre.bind(this)}
-            />
+          ? <GenresList genres={genres} />
           : null
         }
       </div>
@@ -61,19 +55,21 @@ class Genres extends Component {
 //   }
 // }
 
-const GenresList = ({ genres, onClickGenre }) => {
+const GenresList = ({ genres }) => {
   return (
     <div>
-      {genres.map(genre => 
-        <Button
-          onClick={() => onClickGenre(genre)}
+      {genres.map(genre =>
+        <Link
+          to={'genre/:' + genre}
           key={genre}
         >
-          {genre}
-        </Button>
+          <Button>
+            {genre}
+          </Button>
+        </Link>
       )}
     </div>
   );
 }
 
-export default Genres;
+export default withRouter(Genres);
