@@ -14,21 +14,22 @@ class Navigation extends Component {
         position="sticky"
       >
         <MenuItem>
-          <Link
-            to={ROUTES.LANDING}
-          >
-            <Typography variant="button">
-              Landing
-            </Typography>
-          </Link>
-          
-          <Link
-            to={ROUTES.GENRES}
-          >
-            <Typography variant="button">
-              Genres
-            </Typography>
-          </Link>
+          {this.props.authenticated
+            ? <Link
+                to={ROUTES.GENRES}
+              >
+                <Typography variant="button">
+                  Music
+                </Typography>
+              </Link>
+            : <Link
+                to={ROUTES.LANDING}
+              >
+                <Typography variant="button">
+                  Landing
+                </Typography>
+              </Link>
+          }
         </MenuItem>
       </AppBar>
     );

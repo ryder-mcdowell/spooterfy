@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-
-import * as ROUTES from '../../constants/routes';
+import Typography from '@material-ui/core/Typography';
 
 class GenreArtists extends Component {
   state = {
@@ -24,6 +23,9 @@ class GenreArtists extends Component {
 
     return (
       <div>
+        <Typography>
+          Artists:
+        </Typography>
         {artists
           ? <ArtistsList artists={artists} />
           : null
@@ -37,11 +39,13 @@ const ArtistsList = ({ artists }) => {
   return (
     <div>
       {artists.map(artist => 
-        <Link to={'/artist/:' + artist} key={artist}>
-          <Button>
-            {artist}
-          </Button>
-        </Link>
+        <div key={artist}>
+          <Link to={'/artist/:' + artist}>
+            <Button>
+              {artist}
+            </Button>
+          </Link>
+        </div>
       )}
     </div>
   );

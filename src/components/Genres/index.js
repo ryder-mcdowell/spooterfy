@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 class Genres extends Component {
   state = {
@@ -20,6 +21,9 @@ class Genres extends Component {
 
     return (
       <div>
+        <Typography>
+          Genres:
+        </Typography>
         {genres
           ? <GenresList genres={genres} />
           : null
@@ -33,14 +37,15 @@ const GenresList = ({ genres }) => {
   return (
     <div>
       {genres.map(genre =>
-        <Link
-          to={'/genre/:' + genre}
-          key={genre}
-        >
-          <Button>
-            {genre}
-          </Button>
-        </Link>
+        <div key={genre}>
+          <Link
+            to={'/genre/:' + genre}
+          >
+            <Button>
+              {genre}
+            </Button>
+          </Link>
+        </div>
       )}
     </div>
   );
