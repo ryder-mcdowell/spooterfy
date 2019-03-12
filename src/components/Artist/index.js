@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Sound from 'react-sound';
+import axios from 'axios';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -50,7 +51,14 @@ class Artist extends Component {
       });
   }
 
-  onClickSong(song) {
+  onClickSong(song, album) {
+    const { match } = this.props;
+
+    axios.post('http://ec2-54-89-244-138.compute-1.amazonaws.com:8081/play', {
+      artist: match.params.artist.replace(':', ''),
+      album: album,
+      song: song
+    });
     this.setState({ selectedSong: song });
   }
 
@@ -91,6 +99,7 @@ const AlbumsList = ({ albums, onClickSong, selectedSong }) => {
               {album}
             </Typography>
             <SongsList
+              album={album}
               songs={albums[album]}
               onClickSong={onClickSong}
               selectedSong={selectedSong}
@@ -102,13 +111,13 @@ const AlbumsList = ({ albums, onClickSong, selectedSong }) => {
     );
 }
 
-const SongsList = ({ songs, onClickSong, selectedSong }) => {
+const SongsList = ({ album, songs, onClickSong, selectedSong }) => {
   if (songs && songs.length > 0) {
     return (
       <div>
         {songs.map(song =>
           <div key={song.name}>
-            <Button onClick={() => onClickSong(song.name)}>
+            <Button onClick={() => onClickSong(song.name, album)}>
               {song.name}
             </Button>
             <Sound
